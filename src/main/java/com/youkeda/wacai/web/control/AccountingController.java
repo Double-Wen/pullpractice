@@ -27,11 +27,11 @@ public class AccountingController {
         records.add(record);
         for (AccountingRecord record1 : records) {
             result = result + "记录:" +
-                    "  发生时间:" + record.getCreateTime() +
-                    "  金额:" + record.getAmount() +
-                    "  类别:" + record.getType() +
-                    "  科目:" + record.getCategory() +
-                    "  记账时间:" + record.getTime();
+                    "  发生时间:" + record1.getCreateTime() +
+                    "  金额:" + record1.getAmount() +
+                    "  类别:" + record1.getType() +
+                    "  科目:" + record1.getCategory() +
+                    "  记账时间:" + record1.getTime();
             result = result + "<br>";
 
         }
