@@ -19,6 +19,7 @@ public class AccountingController {
         Date time = new Date();
         record.setTime(time);
         String str = "";
+        records.add(record);
         for (int index=0;index<records.size();index++){
             AccountingRecord item = records.get(index);
             String temp1 = item.getCreateTime();
