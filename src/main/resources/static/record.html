@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>记账表单</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.wacai.com/favicon.ico"/>
+</head>
+<body>
+<div>
+    <h1>记账表单</h1>
+</div>
+<div>
+    <form action="/record" method="post">
+        <div>
+            <input type="text" name="createTime" placeholder="发生日期，如2019-01-10">
+        </div>
+        <div>
+            <input type="text" name="amount" placeholder="金额">
+        </div>
+        <div>
+            <select name="type">
+                <option value="收入">收入</option>
+                <option value="支出">支出</option>
+            </select>
+        </div>
+        <div>
+            <select name="category">
+                <option value="房租">房租</option>
+                <option value="水电">水电</option>
+                <option value="吃饭">吃饭</option>
+                <option value="请客吃饭">请客吃饭</option>
+                <option value="ktv">ktv</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">记一笔</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
