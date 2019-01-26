@@ -3,12 +3,14 @@ package com.youkeda.wacai.web.control;
 import com.youkeda.wacai.web.model.Accounting;
 import com.youkeda.wacai.web.model.AccountingRecord;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class AccountingController {
@@ -25,17 +27,20 @@ public class AccountingController {
         record.setTime(time);
         String result = "";
         records.add(record);
-        for (AccountingRecord record1 : records) {
+        for (AccountingRecord temp : records) {
             result = result + "记录:" +
-                    "  发生时间:" + record1.getCreateTime() +
-                    "  金额:" + record1.getAmount() +
-                    "  类别:" + record1.getType() +
-                    "  科目:" + record1.getCategory() +
-                    "  记账时间:" + record1.getTime();
+                    "  发生时间:" + temp.getCreateTime() +
+                    "  金额:" + temp.getAmount() +
+                    "  类别:" + temp.getType() +
+                    "  科目:" + temp.getCategory() +
+                    "  记账时间:" + temp.getTime();
             result = result + "<br>";
 
         }
         return result;
     }
-
+    @RequestMapping(path = "/search")
+    public String search(@RequestParam("amount") int amount){
+        List<AccountingRecord> flitered = records.stream().filter(str->str).collect(Collectors.toList());
+    }
 }
