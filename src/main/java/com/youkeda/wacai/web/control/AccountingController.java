@@ -41,6 +41,7 @@ public class AccountingController {
     }
     @RequestMapping(path = "/search")
     public String search(@RequestParam("amount") int amount){
-        List<AccountingRecord> flitered = records.stream().filter(str->str).collect(Collectors.toList());
+        List<AccountingRecord> flitered = records.stream().filter(str->str.getAmount()>amount).collect(Collectors.toList());
+
     }
 }
