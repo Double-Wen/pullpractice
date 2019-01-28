@@ -44,7 +44,11 @@ public class AccountingController {
         List<AccountingRecord> flitered = records.stream().filter(str->str.getAmount()>amount).collect(Collectors.toList());
         StringBuilder sb = new StringBuilder();
         for(AccountingRecord temp:flitered){
-            sb.append(temp);
+            sb.append("记录"+"金额"+temp.getAmount());
+            sb.append("记账时间"+temp.getTime());
+            sb.append("发生时间"+temp.getCreateTime());
+            sb.append("类型"+temp.getType());
+            sb.append("项目"+temp.getCategory());
         }
         return ""+sb;
     }
