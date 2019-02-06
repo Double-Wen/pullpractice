@@ -49,6 +49,6 @@ public class AccountingController {
             sb.append("类型"+temp.getType());
             sb.append("项目"+temp.getCategory());
         }
-        return ""+sb;
+        return sb.toString();
     }
 }
