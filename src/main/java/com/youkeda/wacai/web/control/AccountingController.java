@@ -1,11 +1,11 @@
 package com.youkeda.wacai.web.control;
 
-import com.youkeda.wacai.web.model.Accounting;
-import com.youkeda.wacai.web.model.AccountingRecord;
+import com.youkeda.wacai.web.model.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,5 +50,30 @@ public class AccountingController {
             sb.append("项目"+temp.getCategory());
         }
         return sb.toString();
+    }
+
+    List<Payinfo> payinfos=new ArrayList<>();
+    @PostConstruct
+    public void init(){
+        //初始化白条数据
+        Payinfo baitiao=new Payinfo();
+        baitiao.setPayType(PayType.baitiao);
+        baitiao.setBillingDate(10);
+        baitiao.setDueDate(20);
+        payinfos.add(baitiao);
+        //初始化花呗数据
+        Payinfo huabei=new Payinfo();
+        huabei.setPayType(PayType.huabei);
+        huabei.setBillingDate(20);
+        huabei.setDueDate(10);
+        payinfos.add(huabei);
+        //初始化信用卡数据
+        CreditCard creditCard = new CreditCard();
+        creditCard.setPayType(PayType.creditCard);
+        creditCard.setBillingDate(5);
+        creditCard.setDueDate(25);
+        creditCard.setName("招商银行信用卡");
+        creditCard.setCardNumber("111111111111");
+        payinfos.add(creditCard);
     }
 }
