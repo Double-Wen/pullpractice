@@ -55,7 +55,7 @@ public class AccountingController {
         return sb.toString();
     }
 
-    List<Payinfo> payinfos = new ArrayList<>();
+    public static final List<Payinfo> payinfos = new ArrayList<>();
 
     @PostConstruct
     public void init() {
