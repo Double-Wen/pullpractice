@@ -1,6 +1,9 @@
 package com.youkeda.wacai.web.control;
 
 import com.youkeda.wacai.web.model.*;
+import com.youkeda.wacai.web.service.FinanceService;
+import com.youkeda.wacai.web.service.impl.JdFinanceServiceImpl;
+import com.youkeda.wacai.web.service.impl.YuebaoFinanceServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -107,5 +110,20 @@ public class AccountingController {
             result.setStagesCount(stagesCount);
             return result;
         }
+    }
+
+    @RequestMapping(path = "/finance")
+    public FinanceInfo finance(@RequestParam("type") FinanceType type,
+                               @RequestParam("amount") double amount, @RequestParam("days") int days){
+        FinanceService financeService = null;
+        //根据不同的类型，实例化不同的服务实现者
+        if (FinanceType.yuebao.equals(type)){
+            financeService = new YuebaoFinanceServiceImpl();
+        }else if (FinanceType.jd.equals(type)){
+            financeService = new JdFinanceServiceImpl();
+        }else {
+            return null;
+        }
+        return financeService.invest(amount, days);
     }
 }
