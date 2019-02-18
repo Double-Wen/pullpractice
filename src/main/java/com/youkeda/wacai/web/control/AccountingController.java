@@ -91,7 +91,7 @@ public class AccountingController {
             result.setBillingDate(creditCard.getBillingDate());
             result.setDueDate(creditCard.getDueDate());
             result.setPayType(PayType.creditCard);
-            result.setAmont(amount);
+            result.setAmount(amount);
             result.setStagesCount(stagesCount);
             result.setName(creditCard.getName());
             result.setCardNumber(creditCard.getCardNumber());
@@ -103,7 +103,7 @@ public class AccountingController {
             result.setBillingDate(payinfo.getBillingDate());
             result.setDueDate(payinfo.getDueDate());
             result.setPayType(payType);
-            result.setAmont(amount);
+            result.setAmount(amount);
             result.setStagesCount(stagesCount);
             return result;
         }

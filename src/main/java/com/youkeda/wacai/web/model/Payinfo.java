@@ -4,7 +4,7 @@ public class Payinfo {
     private PayType payType;
     private int billingDate;
     private int dueDate;
-    private double amont;
+    private double amount;
     private int stagesCount;
 
     public PayType getPayType() {
@@ -31,12 +31,12 @@ public class Payinfo {
         this.dueDate = dueDate;
     }
 
-    public double getAmont() {
-        return amont;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setAmont(double amont) {
-        this.amont = amont;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public int getStagesCount() {
