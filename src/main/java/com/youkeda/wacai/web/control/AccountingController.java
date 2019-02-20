@@ -2,7 +2,9 @@ package com.youkeda.wacai.web.control;
 
 import com.youkeda.wacai.web.model.*;
 import com.youkeda.wacai.web.service.FinanceService;
+import com.youkeda.wacai.web.service.RecordService;
 import com.youkeda.wacai.web.service.impl.JdFinanceServiceImpl;
+import com.youkeda.wacai.web.service.impl.RecordServiceImpl;
 import com.youkeda.wacai.web.service.impl.YuebaoFinanceServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +18,11 @@ import java.util.stream.Collectors;
 
 @RestController
 public class AccountingController {
+
+    private static List<AccountingRecord> records = new ArrayList<>();
+    private static List<Payinfo> payinfos = new ArrayList<>();
+    private static RecordService recordService = new RecordServiceImpl();
+
     @RequestMapping(path = "/accounting")
     public Accounting accounting(Accounting accounting) {
         int result = accounting.getCash() + accounting.getIncome() - accounting.getRent() - accounting.getCharges() - accounting.getEat() - accounting.getTreat() - accounting.getKtv();
@@ -23,25 +30,41 @@ public class AccountingController {
         return accounting;
     }
 
-    List<AccountingRecord> records = new ArrayList<>();
+//    @RequestMapping(path = "/record")
+//    public String record(AccountingRecord record) {
+//        Date time = new Date();
+//        record.setTime(time);
+//        String result = "";
+//        records.add(record);
+//        for (AccountingRecord temp : records) {
+//            result = result + "记录:" +
+//                    "  发生时间:" + temp.getCreateTime() +
+//                    "  金额:" + temp.getAmount() +
+//                    "  类别:" + temp.getType() +
+//                    "  科目:" + temp.getCategory() +
+//                    "  记账时间:" + temp.getTime();
+//            result = result + "<br>";
+//
+//        }
+//        return result;
+//    }
 
-    @RequestMapping(path = "/record")
-    public String record(AccountingRecord record) {
-        Date time = new Date();
-        record.setTime(time);
-        String result = "";
-        records.add(record);
-        for (AccountingRecord temp : records) {
-            result = result + "记录:" +
-                    "  发生时间:" + temp.getCreateTime() +
-                    "  金额:" + temp.getAmount() +
-                    "  类别:" + temp.getType() +
-                    "  科目:" + temp.getCategory() +
-                    "  记账时间:" + temp.getTime();
-            result = result + "<br>";
+    @RequestMapping(path="/record")
+    public String record (AccountingRecord accountingRecord){
 
+        if (accountingRecord.getAmount() == 0){
+            return "";
         }
-        return result;
+        Date time = new Date();
+        accountingRecord.setTime(time);
+        //调用方法
+        recordService.record(accountingRecord);
+        return "记录成功";
+    }
+
+    @RequestMapping(path = "/query")
+    public List<AccountingRecord> query() {
+        return recordService.query();
     }
 
     @RequestMapping(path = "/search")
@@ -57,8 +80,6 @@ public class AccountingController {
         }
         return sb.toString();
     }
-
-    List<Payinfo> payinfos = new ArrayList<>();
 
     @PostConstruct
     public void init() {
